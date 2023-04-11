@@ -8,6 +8,9 @@ import view.UI.RoundLabel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.List;
@@ -65,7 +68,7 @@ public class SettingGameFrame extends JFrame {
   }
 
   private void addBackgroundImage() {
-    mainPanel = new ImagePanel("C:\\Users\\jimmylaw21\\OneDrive - 南方科技大学\\桌面\\CS109-2023-Sping-ChessDemo\\resource\\gameBg.jpg");
+    mainPanel = new ImagePanel(getClass().getResource("/gameBg.jpg"));
     setContentPane(mainPanel);
     mainPanel.setLayout(null);
   }
@@ -130,7 +133,11 @@ public class SettingGameFrame extends JFrame {
         if (server.verifyUser(usernameField.getText(), passwordField.getText())) {
           JOptionPane.showMessageDialog(loginDialog, "Username already exists!");
         } else {
-          server.registerUser(usernameField.getText(), passwordField.getText());
+          try {
+            server.registerUser(usernameField.getText(), passwordField.getText());
+          } catch (IOException ex) {
+            throw new RuntimeException(ex);
+          }
           user = server.getUser(usernameField.getText());
           updateLabel(usernameField.getText());
           JOptionPane.showMessageDialog(loginDialog, "Register successfully!");
@@ -218,7 +225,6 @@ public class SettingGameFrame extends JFrame {
     dialog.setVisible(true);
   }
 
-
   private void addVolumeButton() {
     volumeButton = new RoundButton("Volume");
     volumeButton.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -285,7 +291,85 @@ public class SettingGameFrame extends JFrame {
     ruleButton = new RoundButton("Rule");
     ruleButton.setSize(BUTTON_WIDTH, BUTTON_HEIGHT);
     ruleButton.setFont(new Font("Arial", Font.BOLD, 24));
-    //展示游戏规则
+
+    // Add an ActionListener to the ruleButton
+    ruleButton.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        showGameRules();
+      }
+    });
+  }
+
+  private void showGameRules() {
+    String gameRules = "Introduction\n" +
+        "Jungle or Dou Shou Qi (斗兽棋), is a modern Chinese board game with an obscure history, as\n" +
+        "shown in the Figure 1. The game is played on a 7×9 board and is popular with children in the\n" +
+        "Far East. Jungle is a two-player strategy game and has been cited by The Playboy Winner's\n" +
+        "Guide to Board Games as resembling the Western game Stratego.\n" +
+        "Pieces\n" +
+        "Each player owns 8 animal pieces representing different animals of various ranks, and higher\n" +
+        "ranked animals can capture the animals of lower or equal rank. But there is a special case that\n" +
+        "eleplant cannot capture the rat while the rat can capture the eleplant.\n" +
+        "(Eleplant>Lion>Tiger>Leopard>Wolf>Dog>Cat>Rat)\n" +
+        "Each player moves alternatively, and all pieces can move one square horizontally or\n" +
+        "vertically, but not diagonally. As shown in the table, there are some special movements for\n" +
+        "lion, tiger and rat. These will be explained in detail:\n" +
+        " Entering the river: \n" +
+        "  The rat is the only animal that may go onto a water square. \n" +
+        "  After entering the river, the rat cannot be captured by any piece on land. \n" +
+        "  Also, the rat in river cannot capture the eleplant on the land. \n" +
+        " Jumping across the river: \n" +
+        "  The lion and tiger can jump over a river vertically or horizonally. They jump from a \n" +
+        " square on one edge of the river to the next non-water square on the other side. \n" +
+        "  If that square contains an enemy piece of equal or lower rank, the lion or tiger \n" +
+        " capture it as part of their jump.\n" +
+        "  However, a jumping move is blocked (not permitted) if a rat of either color \n" +
+        "currently occupies any of the intervening water squares." +
+        "Chessboard \n" +
+        "Jungle game has an interesting chessboard with differerent terrains including dens, traps and \n" +
+        "rivers. After the initialization, the pieces start on squares with pictures corresponding to their \n" +
+        "animals, which are invariably shown on the Jungle board.\n" +
+        "The three kinds of special terrains are explained as:\n" +
+        " Dens(兽穴): It is not allowed that the piece enters its own den. If the player's piece enters \n" +
+        "the dens of his/her opponent, then the player wins,.\n" +
+        " Trap(陷阱): If a piece entering the opponents's trap, then its rank is reduced into 0 \n" +
+        "temporarily before exiting. The trapped piece could be captured by any pieces of the \n" +
+        "defensing side.\n" +
+        "  River(河流): They are located in the center of the chessboard, each comprising 6 squares in a \n" +
+        "2×3 rectangle. Only rats could enter the river, and lions and tigers could jump across the \n" +
+        "river. \n" +
+        "Rules\n" +
+        "1. Game Initialization: At the beginning, all 16 pieces are put into the chessboard as the initial \n" +
+        "state. The initial state is shown in Figure 6.\n" +
+        "2. Game Progress: The player with blue moves first. Two players take the turn alternatively until \n" +
+        "the game is finished. When a player takes turn, he/she can select one of his pieces and do \n" +
+        "one of the following:\n" +
+        " Moving one square horizontally or vertically. For lion, tiger and rat, they also have special \n" +
+        "movements related to the river squares, which have been introduced previously.\n" +
+        " Capturing an opposing piece. In all captures, the captured pieces is removed from the board \n" +
+        "and the square is occupied by the capturing piece. A piece can capture any enemy piece \n" +
+        "following the rules introduced in \"Pieces\".\n" +
+        "3. Game Termination: A player loses the game if one of the following happens:\n" +
+        " The den is entered by his/her opponents.\n" +
+        " All of his/her pieces are captured and he/her is unable to do any movement.";
+
+    JTextArea textArea = new JTextArea(gameRules);
+    textArea.setWrapStyleWord(true);
+    textArea.setLineWrap(true);
+    textArea.setEditable(false);
+    textArea.setMargin(new Insets(10, 10, 10, 10));
+    textArea.setCaretPosition(0);
+
+    JScrollPane scrollPane = new JScrollPane(textArea);
+    scrollPane.setPreferredSize(new Dimension(400, 300));
+
+    JOptionPane.showMessageDialog(
+        null,
+        scrollPane,
+        "游戏规则",
+        JOptionPane.INFORMATION_MESSAGE
+    );
   }
 
   private void addBackButton() {

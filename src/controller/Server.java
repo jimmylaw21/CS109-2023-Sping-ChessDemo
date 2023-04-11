@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.*;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -12,14 +14,14 @@ import java.util.PriorityQueue;
  * 并对每个连接了的客户端开启一个ClientHandler线程来处理客户端的请求
  */
 public class Server implements Serializable {
-  private final String USERS_FILE = "C:\\Users\\jimmylaw21\\OneDrive - 南方科技大学\\桌面\\CS109-2023-Sping-ChessDemo\\resource\\users.txt";
+  private final URL USERS_FILE = getClass().getResource("/users.txt");
   private Map<String, String> userMap = new HashMap<String, String>();
   private PriorityQueue<User> rankQueue = new PriorityQueue<>();
   public Server() {
     loadUsers();
   }
 
-  public void registerUser(String key, String value) {
+  public void registerUser(String key, String value) throws IOException {
     User user = new User(key, value);
     rankQueue.add(user);
     userMap.put(key, value);
@@ -37,8 +39,10 @@ public class Server implements Serializable {
     return false;
   }
 
-  private void saveUsers() {
-    try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(USERS_FILE))) {
+  private void saveUsers() throws IOException {
+    URLConnection connection = USERS_FILE.openConnection();
+    connection.setDoOutput(true);
+    try (ObjectOutputStream outputStream = new ObjectOutputStream(connection.getOutputStream())) {
       outputStream.writeObject(userMap);
       outputStream.writeObject(rankQueue);
     } catch (IOException e) {
@@ -47,7 +51,7 @@ public class Server implements Serializable {
   }
 
   private void loadUsers() {
-    try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(USERS_FILE))) {
+    try (ObjectInputStream inputStream = new ObjectInputStream(USERS_FILE.openStream())) {
       userMap = (Map<String, String>)inputStream.readObject();
       rankQueue = (PriorityQueue<User>)inputStream.readObject();
     } catch (IOException | ClassNotFoundException e) {

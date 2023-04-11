@@ -2,12 +2,13 @@ package view.UI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 
 // ImagePanel 类
 public class ImagePanel extends JPanel {
   private Image backgroundImage;
 
-  public ImagePanel(String imagePath) {
+  public ImagePanel(URL imagePath) {
     ImageIcon imageIcon = new ImageIcon(imagePath);
     this.backgroundImage = imageIcon.getImage();
   }
@@ -18,7 +19,7 @@ public class ImagePanel extends JPanel {
     g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
   }
 
-  public void setBackgroundImage(String imagePath) {
+  public void setBackgroundImage(URL imagePath) {
     ImageIcon imageIcon = new ImageIcon(imagePath);
     this.backgroundImage = imageIcon.getImage();
   }

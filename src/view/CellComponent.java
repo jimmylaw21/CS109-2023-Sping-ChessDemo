@@ -35,9 +35,9 @@ public class CellComponent extends JPanel {
             } else if (gridType.equals(GridType.LAND)) {
                 background = Color.decode("#A9907E");
             } else if (gridType.equals(GridType.TRAP)) {
-                background = Color.decode("#617143");
+                background = Color.decode("#7AA874");
             } else if (gridType.equals(GridType.DENS)) {
-                background = Color.decode("#89375F");
+                background = Color.decode("#D14D72");
             }
 //        } catch (IOException e) {
 //            e.printStackTrace();

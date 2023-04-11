@@ -1,7 +1,9 @@
 package model;
 
+import music.MusicThread;
 import view.GridType;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -404,6 +406,31 @@ public class Chessboard {
             }
         }
         return availableSteps;
+    }
+
+    public void moveMusic(ChessboardPoint point){
+        ChessPiece chessPiece = getChessPieceAt(point);
+        MusicThread musicThread = null;
+
+        if (chessPiece.getName().equals("Rat")){
+            musicThread = new MusicThread(getClass().getResource("/music/Moiuse squeal 2.wav"), false);
+        } else if (chessPiece.getName().equals("Cat")){
+            musicThread = new MusicThread(getClass().getResource("/music/Cat meow 5.wav"), false);
+        } else if (chessPiece.getName().equals("Dog")){
+            musicThread = new MusicThread(getClass().getResource("/music/Dog bark 3.wav"), false);
+        } else if (chessPiece.getName().equals("Wolf")){
+            musicThread = new MusicThread(getClass().getResource("/music/Wolf barks 1.wav"), false);
+        } else if (chessPiece.getName().equals("Leopard")){
+            musicThread = new MusicThread(getClass().getResource("/music/Lion roar 3.wav"), false);
+        } else if (chessPiece.getName().equals("Tiger")){
+            musicThread = new MusicThread(getClass().getResource("/music/Tiger attack 1.wav"), false);
+        } else if (chessPiece.getName().equals("Lion")){
+            musicThread = new MusicThread(getClass().getResource("/music/Lion atacks, bites 5.wav"), false);
+        } else if (chessPiece.getName().equals("Elephant")){
+            musicThread = new MusicThread(getClass().getResource("/music/Elephant Trumpeting 1.wav"), false);
+        }
+        Thread music = new Thread(musicThread);
+        music.start();
     }
 
 }

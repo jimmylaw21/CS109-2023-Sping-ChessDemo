@@ -43,7 +43,7 @@ public class MainGameFrame extends JFrame {
   }
 
   private void initComponents() {
-    mainPanel = new ImagePanel("C:\\Users\\jimmylaw21\\OneDrive - 南方科技大学\\桌面\\CS109-2023-Sping-ChessDemo\\resource\\MainBackground.jpg");
+    mainPanel = new ImagePanel(getClass().getResource("/MainBackground.jpg"));
     setContentPane(mainPanel);
     mainPanel.setLayout(new GridBagLayout());
 

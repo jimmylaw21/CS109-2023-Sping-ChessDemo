@@ -8,6 +8,7 @@ import view.UI.RoundLabel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 
 /**
  * 这个类表示游戏过程中的整个游戏界面，是一切的载体
@@ -31,9 +32,7 @@ public class ChessGameFrame extends JFrame {
     private JButton SettingButton;
     private JButton ExitButton;
     private ChessboardComponent chessboardComponent;
-
-    private String HeaderPath = "C:\\Users\\jimmylaw21\\OneDrive - 南方科技大学\\桌面\\CS109-2023-Sping-ChessDemo\\resource\\";
-    private String[] bgPaths = {"gameBg.jpg", "gameBg2.jpg", "gameBg3.jpg", "gameBg4.jpg"};
+    private String[] bgPaths = {"/gameBg.jpg", "/gameBg2.jpg", "/gameBg3.jpg", "/gameBg4.jpg"};
     public ChessGameFrame(int width, int height, Server server, User user) {
         setTitle("2023 CS109 Project Demo"); //设置标题
         this.WIDTH = width;
@@ -53,7 +52,7 @@ public class ChessGameFrame extends JFrame {
     }
 
     private void addBackgroundImage() {
-        String defaultPath = HeaderPath + bgPaths[0];
+        URL defaultPath = getClass().getResource(bgPaths[0]);
         mainPanel = new ImagePanel(defaultPath);
         setContentPane(mainPanel);
         mainPanel.setLayout(null);
@@ -194,7 +193,7 @@ public class ChessGameFrame extends JFrame {
     }
 
     public void setBackgroundImage(int index) {
-        String path = HeaderPath + bgPaths[index - 1];
+        URL path = getClass().getResource(bgPaths[index - 1]);
         mainPanel.setBackgroundImage(path);
         mainPanel.repaint();
     }

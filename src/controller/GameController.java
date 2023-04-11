@@ -7,6 +7,8 @@ import view.CellComponent;
 import view.ChessComponent;
 import view.ChessGameFrame;
 import view.ChessboardComponent;
+import music.MusicThread;
+
 
 import javax.swing.*;
 import java.io.*;
@@ -166,6 +168,8 @@ public class GameController implements GameListener {
 
             //如果是进入陷阱格子，降低棋子的等级至0
             model.solveTrap(selectedPoint, point);
+
+            model.moveMusic(selectedPoint);
 
             model.moveChessPiece(selectedPoint, point);
             view.setChessComponentAtGrid(point, view.removeChessComponentAtGrid(selectedPoint));

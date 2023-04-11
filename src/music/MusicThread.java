@@ -1,13 +1,15 @@
 package music;
 
 import javax.sound.sampled.*;
+import java.io.File;
+import java.net.URL;
 
 public class MusicThread implements Runnable {
-  private String musicPath;
+  private URL musicPath;
   private boolean isLoop;
   private FloatControl gainControl;
 
-  public MusicThread(String musicPath, boolean isLoop) {
+  public MusicThread(URL musicPath, boolean isLoop) {
     this.musicPath = musicPath;
     this.isLoop = isLoop;
   }
@@ -16,7 +18,7 @@ public class MusicThread implements Runnable {
   public void run() {
     try {
       Clip clip = AudioSystem.getClip();
-      AudioInputStream ais = AudioSystem.getAudioInputStream(getClass().getResourceAsStream(musicPath));
+      AudioInputStream ais = AudioSystem.getAudioInputStream(musicPath);
       clip.open(ais);
 
       gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
