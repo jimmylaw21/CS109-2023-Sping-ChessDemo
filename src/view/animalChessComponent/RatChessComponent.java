@@ -13,11 +13,7 @@ public class RatChessComponent extends ChessComponent {
     super(owner, size);
 
     // Load the GIF image
-    if (owner == PlayerColor.RED) {
-      gifImage = new ImageIcon("C:\\Users\\jimmylaw21\\OneDrive - 南方科技大学\\桌面\\CS109-2023-Sping-ChessDemo\\resource\\Animal Supporter Asset Pack\\Stinky Skunk\\StinkySkunkIdleSide.gif");
-    } else {
-      gifImage = new ImageIcon("C:\\Users\\jimmylaw21\\OneDrive - 南方科技大学\\桌面\\CS109-2023-Sping-ChessDemo\\resource\\Animal Supporter Asset Pack\\Stinky Skunk\\StinkySkunkIdleSide.gif");
-    }
+    gifImage = new ImageIcon(getClass().getResource("/Animal Supporter Asset Pack/Stinky Skunk/StinkySkunkIdleSide.gif"));
 
   }
 
