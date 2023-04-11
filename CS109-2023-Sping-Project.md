@@ -8,12 +8,6 @@ Major: Computer Science and Technology
 School: Southern University of Science and Technology
 Email: [12112517@mail.sustech.edu.cn](mailto:12112517@mail.sustech.edu.cn)
 
-### Preface
-
-这是一个SUSTech CS109-2023-Sping课程project的一个样品，在实现基础功能的基础上实现了一些bonus功能，包括但不限于一个包含主界面，排行榜，游戏模式选择在内的多人游戏平台，更漂亮的GUI设计和动画效果，展示可行区域，复盘动画，无限制悔棋，简单的随机AI。(更高级的AI和联网游戏可能会出现在未来的某一天LOL)
-
-正在上这门课的同学们注意，这只是一个样品，任何的直接抄袭行为将会面临查重系统的严格审核，所以为了你的信誉和成绩，可以参考一些功能的实现思路，但是请不要直接使用里面的任何代码片段。
-
 ### Project Requirements Analysis
 
 **Task 1: Game Initialization (10 pts)**
@@ -56,7 +50,7 @@ Email: [12112517@mail.sustech.edu.cn](mailto:12112517@mail.sustech.edu.cn)
 
 - Design a platform for your game, such as adding multi-user, ranking list, adding start menu for selecting the game modes, etc.
 - 设计更多种Frame，合理安排各个功能组件的位置；设计注册登录系统，增加胜局统计；展示排行榜时即时排序，或者使用堆来储存用户？
--  Make your game looks nicer, such as using beautiful images as chessboard, changing the theme, adding sound effect, adding background music, adding more prompt label when the game is in process.
+- Make your game looks nicer, such as using beautiful images as chessboard, changing the theme, adding sound effect, adding background music, adding more prompt label when the game is in process.
 - 研究怎么在容器中添加/替换图片；设计一个线程类来使用音乐库来播放音乐；overwrite那些你觉得不美观的框架组件？
 - Show possible moves when a piece is selected.
 - 复用isValidMove和isValidCapture
@@ -74,4 +68,4 @@ Email: [12112517@mail.sustech.edu.cn](mailto:12112517@mail.sustech.edu.cn)
 
 ### Some Words from the Author
 
-这次project难度适中，针对得分点发力，尽量多做一些功能，就能拿到较高的分数，推荐各位同学们尽快开始，争取15周答辩好并去理论课答辩！
+这次project难度适中，针对得分点发力，尽量多做一些功能，就能拿到较高的分数，推荐各位同学们尽快开始，期中考后就可以开始动工了，争取在15周答辩好，拿到1/20-1/15选取比例的理论课答辩名额！

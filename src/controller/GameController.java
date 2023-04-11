@@ -112,6 +112,7 @@ public class GameController implements GameListener {
                         e.printStackTrace();
                     }
                 }
+                aiMove();
                 this.stepList = stepList;
             } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
