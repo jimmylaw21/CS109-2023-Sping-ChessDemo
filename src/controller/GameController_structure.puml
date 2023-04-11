@@ -1,0 +1,274 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": false,
+    "cutInterfaceStructures": false,
+    "cutDataStructures": false,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 6,
+    "backwardDepth": 6,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "controller.GameController",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_104069929 { 
+   	label=model
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Cell104069929[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Cell</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   piece: ChessPiece [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ removePiece()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+ChessPiece104069929[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ChessPiece</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   name: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   owner: PlayerColor [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   rank: int [1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ canCapture(target: ChessPiece): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+Chessboard104069929[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Chessboard</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   grid: Cell[][] [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- calculateDistance(src: ChessboardPoint, dest: ChessboardPoint): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ captureChessPiece(src: ChessboardPoint, dest: ChessboardPoint)</TD></TR>
+<TR><TD ALIGN="LEFT" >- getChessPieceAt(point: ChessboardPoint): ChessPiece</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getChessPieceOwner(point: ChessboardPoint): PlayerColor</TD></TR>
+<TR><TD ALIGN="LEFT" >- getGridAt(point: ChessboardPoint): Cell</TD></TR>
+<TR><TD ALIGN="LEFT" >- initGrid()</TD></TR>
+<TR><TD ALIGN="LEFT" >- initPieces()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ isValidCapture(src: ChessboardPoint, dest: ChessboardPoint): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ isValidMove(src: ChessboardPoint, dest: ChessboardPoint): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ moveChessPiece(src: ChessboardPoint, dest: ChessboardPoint)</TD></TR>
+<TR><TD ALIGN="LEFT" >- removeChessPiece(point: ChessboardPoint): ChessPiece</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+ChessboardPoint104069929[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ChessboardPoint</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   col: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   row: int [1]</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_3619493 { 
+   	label=view
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   CellComponent3619493[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)CellComponent</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   background: Color [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" ># paintComponent(g: Graphics)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+ChessGameFrame3619493[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ChessGameFrame</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   HEIGTH: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   ONE_CHESS_SIZE: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   WIDTH: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   chessboardComponent: ChessboardComponent [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- addChessboard()</TD></TR>
+<TR><TD ALIGN="LEFT" >- addHelloButton()</TD></TR>
+<TR><TD ALIGN="LEFT" >- addLabel()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+ChessboardComponent3619493[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ChessboardComponent</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   CHESS_SIZE: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   gameController: GameController [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   gridComponents: CellComponent[][] [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   riverCell: Set&lt;ChessboardPoint&gt; [0..*]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- calculatePoint(row: int, col: int): Point</TD></TR>
+<TR><TD ALIGN="LEFT" >- getChessboardPoint(point: Point): ChessboardPoint</TD></TR>
+<TR><TD ALIGN="LEFT" >- getGridComponentAt(point: ChessboardPoint): CellComponent</TD></TR>
+<TR><TD ALIGN="LEFT" >+ initiateChessComponent(chessboard: Chessboard)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ initiateGridComponents()</TD></TR>
+<TR><TD ALIGN="LEFT" ># paintComponent(g: Graphics)</TD></TR>
+<TR><TD ALIGN="LEFT" ># processMouseEvent(e: MouseEvent)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ registerController(gameController: GameController)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ removeChessComponentAtGrid(point: ChessboardPoint): ElephantChessComponent</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_637428636 { 
+   	label=controller
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   GameController637428636[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)GameController</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   currentPlayer: PlayerColor [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   model: Chessboard [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   selectedPoint: ChessboardPoint [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   view: ChessboardComponent [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- initialize()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ onPlayerClickCell(point: ChessboardPoint, component: CellComponent)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ onPlayerClickChessPiece(point: ChessboardPoint, component: ElephantChessComponent)</TD></TR>
+<TR><TD ALIGN="LEFT" >- swapColor()</TD></TR>
+<TR><TD ALIGN="LEFT" >- win(): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+'edges    
+Cell104069929 -> ChessPiece104069929[label="piece
+[0..1]"];
+ChessGameFrame3619493 -> ChessboardComponent3619493[label="chessboardComponent
+[0..1]"];
+Chessboard104069929 -> Cell104069929[label="grid
+[0..*]"];
+ChessboardComponent3619493 -> CellComponent3619493[label="gridComponents
+[0..*]"];
+ChessboardComponent3619493 -> ChessboardPoint104069929[label="riverCell
+[0..*]"];
+ChessboardComponent3619493 -> GameController637428636[label="gameController
+[0..1]"];
+GameController637428636 -> Chessboard104069929[label="model
+[0..1]"];
+GameController637428636 -> ChessboardComponent3619493[label="view
+[0..1]"];
+GameController637428636 -> ChessboardPoint104069929[label="selectedPoint
+[0..1]"];
+    
+}
+@enduml
