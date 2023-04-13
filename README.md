@@ -1,8 +1,5 @@
 # CS109-2023-Sping-ChessDemo
 
-![image](https://user-images.githubusercontent.com/95002380/231815848-576dcac9-c64e-4147-b24a-33062e985a2f.png)
-
-
 ### Author Information
 
 Name: Haoyu Luo
@@ -20,6 +17,8 @@ Email: [12112517@mail.sustech.edu.cn](mailto:12112517@mail.sustech.edu.cn)
 这是一个SUSTech CS109-2023-Sping课程project的一个样品，在实现基础功能的基础上实现了一些bonus功能，包括但不限于一个包含主界面，排行榜，游戏模式选择在内的多人游戏平台，更漂亮的GUI设计和动画效果，展示可行区域，复盘动画，无限制悔棋，简单的随机AI。(更高级的AI和联网游戏可能会出现在未来的某一天LOL)
 
 正在上这门课的同学们注意，这只是一个样品，任何的直接抄袭行为将会面临查重系统的严格审核，所以为了你的信誉和成绩，可以参考一些功能的实现思路，但是请不要直接使用里面的任何代码片段。
+
+![image](https://user-images.githubusercontent.com/95002380/231815848-576dcac9-c64e-4147-b24a-33062e985a2f.png)
 
 ### Project Requirements Analysis
 
