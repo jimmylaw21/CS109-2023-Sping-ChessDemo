@@ -80,7 +80,7 @@ public class CellComponent extends JPanel {
 
         RoundRectangle2D roundedRectangle = new RoundRectangle2D.Double(1, 1, this.getWidth() - 1, this.getHeight() - 1, cornerRadius, cornerRadius);
         g2d.fill(roundedRectangle);
-        RoundBorder roundBorder = new RoundBorder(Color.BLACK);
+        RoundBorder roundBorder = new RoundBorder(Color.BLACK, 15, 15);
         setBorder(roundBorder);
 
         // Draw the image with rounded corners

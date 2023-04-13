@@ -26,6 +26,7 @@ public class ChessboardComponent extends JComponent {
     private final Set<ChessboardPoint> riverCell = new HashSet<>();
     private final Set<ChessboardPoint> trapCell = new HashSet<>();
     private final Set<ChessboardPoint> densCell = new HashSet<>();
+    private boolean isAIPlaying = false;
 
     private GameController gameController;
 
@@ -63,7 +64,7 @@ public class ChessboardComponent extends JComponent {
             for (int j = 0; j < CHESSBOARD_COL_SIZE.getNum(); j++) {
                 if (grid[i][j].getPiece() != null) {
                     ChessPiece chessPiece = grid[i][j].getPiece();
-                    System.out.println(chessPiece.getOwner());
+//                    System.out.println(chessPiece.getOwner());
                     if (chessPiece.getName().equals("Elephant")){
                         gridComponents[i][j].add(
                             new ElephantChessComponent(
@@ -317,7 +318,7 @@ public class ChessboardComponent extends JComponent {
         for (ChessboardPoint validMove : validMoves) {
             CellComponent cellComponent = getGridComponentAt(validMove);
             cellComponent.setValidMove(false);
-            System.out.println("hide valid move" + validMove);
+//            System.out.println("hide valid move" + validMove);
         }
     }
 
@@ -340,7 +341,7 @@ public class ChessboardComponent extends JComponent {
 
     @Override
     protected void processMouseEvent(MouseEvent e) {
-        if (e.getID() == MouseEvent.MOUSE_PRESSED) {
+        if (e.getID() == MouseEvent.MOUSE_PRESSED && isAIPlaying == false) {
             JComponent clickedComponent = (JComponent) getComponentAt(e.getX(), e.getY());
             if (clickedComponent.getComponentCount() == 0) {
                 System.out.print("None chess here and ");
@@ -362,5 +363,13 @@ public class ChessboardComponent extends JComponent {
 
     public ChessGameFrame getChessGameFrame() {
         return chessGameFrame;
+    }
+
+    public boolean isAIPlaying() {
+        return isAIPlaying;
+    }
+
+    public void setAIPlaying(boolean AIPlaying) {
+        isAIPlaying = AIPlaying;
     }
 }

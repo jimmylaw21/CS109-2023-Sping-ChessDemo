@@ -136,9 +136,6 @@ public class Chessboard {
     }
 
     public void captureChessPiece(ChessboardPoint src, ChessboardPoint dest) {
-        if (!isValidCapture(src, dest)) {
-            throw new IllegalArgumentException("Illegal chess capture!");
-        }
         removeChessPiece(dest);
         setChessPiece(dest, removeChessPiece(src));
     }
@@ -344,7 +341,7 @@ public class Chessboard {
         ChessPiece fromPiece = getChessPieceAt(fromPoint);
         ChessPiece toPiece = getChessPieceAt(toPoint);
         Step step = new Step(fromPoint, toPoint, fromPiece, toPiece, currentPlayer, turn);
-        System.out.println(step);
+//        System.out.println(step);
         return step;
     }
 

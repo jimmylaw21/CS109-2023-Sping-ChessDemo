@@ -5,6 +5,14 @@ import java.awt.*;
 
 public class RoundBorder implements Border {
   private Color color;
+  private int arcWidth;
+  private int arcHeight;
+
+  public RoundBorder(Color color, int arcWidth, int arcHeight) {// 有参数的构造方法
+    this.color = color;
+    this.arcWidth = arcWidth;
+    this.arcHeight = arcHeight;
+  }
 
   public RoundBorder(Color color) {// 有参数的构造方法
     this.color = color;
@@ -12,8 +20,6 @@ public class RoundBorder implements Border {
 
   public RoundBorder() {// 无参构造方法
     this.color = Color.BLACK;
-    // 如果实例化时，没有传值
-    // 默认是黑色边框
   }
 
   public Insets getBorderInsets(Component c) {
@@ -29,6 +35,10 @@ public class RoundBorder implements Border {
   public void paintBorder(Component c, Graphics g, int x, int y, int width,
                           int height) {
     g.setColor(color);
-    g.drawRoundRect(0, 0, c.getWidth() - 1, c.getHeight() - 1, 15, 15);
+    if (arcWidth == 0 || arcHeight == 0) {
+      g.drawRoundRect(0, 0, c.getWidth() - 1, c.getHeight() - 1, c.getHeight(), c.getHeight());
+    } else {
+      g.drawRoundRect(0, 0, c.getWidth() - 1, c.getHeight() - 1, arcWidth, arcHeight);
+    }
   }
 }

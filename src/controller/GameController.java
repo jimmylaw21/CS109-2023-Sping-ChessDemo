@@ -79,6 +79,13 @@ public class GameController implements GameListener {
         view.undoStep(step);
         view.repaint();
         swapColor(true);
+        if (gameMode == GameMode.AI_1 || gameMode == GameMode.AI_2 || gameMode ==  gameMode.AI_3 ) {
+            step = stepList.remove(stepList.size() - 1);
+            model.undoStep(step);
+            view.undoStep(step);
+            view.repaint();
+            swapColor(true);
+        }
     }
 
     public void save() {
@@ -204,8 +211,12 @@ public class GameController implements GameListener {
             component.setSelected(false);
             component.repaint();
         } else {
+            if (!model.isValidCapture(selectedPoint, point)) {
+//                throw new IllegalArgumentException("Illegal chess capture!");
+                System.out.println("Illegal chess capture!");
+                return;
+            }
             hideValidMoves();
-
             Step step = model.recordStep(selectedPoint, point, currentPlayer, turnCount);
             stepList.add(step);
 
@@ -235,6 +246,7 @@ public class GameController implements GameListener {
         if (aiPlayer != null && currentPlayer != PlayerColor.BLUE) {
             Step aiStep = aiPlayer.generateMove(currentPlayer);
             if (aiStep != null) {
+                view.setAIPlaying(true);
                 selectedPoint = aiStep.getFrom();
                 view.showSelectedPoint(selectedPoint);
 
@@ -268,6 +280,7 @@ public class GameController implements GameListener {
                     }
 
                     swapColor(false);
+                    view.setAIPlaying(false);
                 });
 
                 // 设置定时器只执行一次
