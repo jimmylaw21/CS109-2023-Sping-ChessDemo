@@ -102,7 +102,7 @@ public class MainGameFrame extends JFrame {
       SwingUtilities.invokeLater(() -> {
             dispose();
             ChessGameFrame ChessGameFrame = new ChessGameFrame(800, 1000, server, user);
-            GameController gameController = new GameController(ChessGameFrame.getChessboardComponent(), new Chessboard(), GameMode.AI_1);
+            GameController gameController = new GameController(ChessGameFrame.getChessboardComponent(), new Chessboard(), GameMode.AI_2);
             ChessGameFrame.setVisible(true);
             this.dispose();
         });

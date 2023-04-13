@@ -2,12 +2,13 @@ package model;
 
 import java.io.Serializable;
 
-public class Step implements Serializable {
+public class Step implements Serializable, Comparable<Step> {
     private ChessboardPoint from;
     private ChessboardPoint to;
     private ChessPiece fromChessPiece;
     private ChessPiece toChessPiece;
     private PlayerColor currentPlayer;
+    private transient int value;
     private int turnCount;
 
     public Step(ChessboardPoint from, ChessboardPoint to, ChessPiece fromChessPiece, ChessPiece toChessPiece, PlayerColor currentPlayer, int turnCount) {
@@ -67,6 +68,14 @@ public class Step implements Serializable {
         this.turnCount = turnCount;
     }
 
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
     @Override
     public String toString() {
         return "Step{" +
@@ -74,6 +83,12 @@ public class Step implements Serializable {
                 ", to=" + to +
                 ", fromChessPiece=" + fromChessPiece +
                 ", toChessPiece=" + toChessPiece +
+                ", value=" + value +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Step o) {
+        return o.getValue() - this.getValue();
     }
 }

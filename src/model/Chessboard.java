@@ -405,6 +405,53 @@ public class Chessboard {
         return availableSteps;
     }
 
+    public List<Step> getValidStepsWithValue(PlayerColor color){
+        List<Step> availableSteps = new ArrayList<>();
+        List<ChessboardPoint> availablePoints = getValidPoints(color);
+        for (ChessboardPoint point : availablePoints) {
+            List<ChessboardPoint> validMoves = getValidMoves(point);
+            for (ChessboardPoint destPoint : validMoves) {
+                Step step = recordStep(point, destPoint, color, 0);
+                //越接近敌方基地，价值越高
+                if (color == PlayerColor.RED) {
+                    step.setValue(destPoint.getRow() - point.getRow() + Math.abs(3 - point.getCol()) - Math.abs(3 - destPoint.getCol()));
+                } else {
+                    step.setValue(point.getRow() - destPoint.getRow() + Math.abs(3 - point.getCol()) - Math.abs(3 - destPoint.getCol()));
+                }
+                if (getChessPieceAt(destPoint) != null) {
+                    step.setValue(step.getValue() + (int) Math.pow(getChessPieceAt(destPoint).getRank(),2));
+                }
+                if (getGridAt(destPoint).getType() == GridType.DENS && getGridAt(destPoint).getOwner() != color) {
+                    step.setValue(10000);
+                }
+                if (getGridAt(destPoint).getType() == GridType.TRAP && getGridAt(destPoint).getOwner() != color) {
+                    //检查周围是否有敌人
+                    if (getChessPieceAt(destPoint) != null) {
+                        step.setValue((int) Math.pow(getChessPieceAt(destPoint).getRank(),2));
+                    } else {
+                        boolean hasEnemy = false;
+                        for (int k = 0; k < 4; k++) {
+                            ChessboardPoint neighborPoint = destPoint.getNeighbor(k);
+                            if (neighborPoint.getRow()<0 || neighborPoint.getRow()>8 || neighborPoint.getCol()<0 || neighborPoint.getCol()>6) {
+                                continue;
+                            }
+                            if (getChessPieceAt(neighborPoint) != null && getChessPieceAt(neighborPoint).getOwner() != color) {
+                                step.setValue(-1);
+                                hasEnemy = true;
+                                break;
+                            }
+                        }
+                        if (!hasEnemy) {
+                            step.setValue(10000);
+                        }
+                    }
+                }
+                availableSteps.add(step);
+            }
+        }
+        return availableSteps;
+    }
+
     public void moveMusic(ChessboardPoint point){
         ChessPiece chessPiece = getChessPieceAt(point);
         MusicThread musicThread = null;

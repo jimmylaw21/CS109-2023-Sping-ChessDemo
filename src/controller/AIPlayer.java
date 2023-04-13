@@ -4,6 +4,7 @@ import model.Chessboard;
 import model.PlayerColor;
 import model.Step;
 
+import java.util.Collections;
 import java.util.List;
 
 public class AIPlayer {
@@ -38,6 +39,27 @@ public class AIPlayer {
   }
   // 贪心
   private Step generateMove2(PlayerColor color) {
+    List<Step> steps = model.getValidStepsWithValue(color);
+    //从大到小排序
+    Collections.sort(steps);
+    //打印value
+    for (Step step : steps) {
+      System.out.print(step.getValue() + " ");
+    }
+    System.out.println();
+    if (steps.size() > 0) {
+      //找到最大的几个value，从中随机选一个
+      int max = steps.get(0).getValue();
+      int count = 0;
+      for (Step step : steps) {
+        if (step.getValue() == max) {
+          count++;
+        } else {
+          break;
+        }
+      }
+      return steps.get((int) (Math.random() * count));
+    }
     return null;
   }
   // 搜索
