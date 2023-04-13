@@ -1,5 +1,8 @@
 # CS109-2023-Sping-ChessDemo
 
+![image](https://user-images.githubusercontent.com/95002380/231815848-576dcac9-c64e-4147-b24a-33062e985a2f.png)
+
+
 ### Author Information
 
 Name: Haoyu Luo
